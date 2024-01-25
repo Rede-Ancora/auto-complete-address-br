@@ -10,7 +10,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-             <block class="O2TI\AutoCompleteAddressBr\Block\Customer\Address" name="autocomple_address_br" template="O2TI_AutoCompleteAddressBr::account/address/autoCompleteAddressBr.phtml" after="-"/>
+             <!-- <block class="O2TI\AutoCompleteAddressBr\Block\Customer\Address" name="autocomple_address_br" template="O2TI_AutoCompleteAddressBr::account/address/autoCompleteAddressBr.phtml" after="-"/> -->
         </referenceContainer>
     </body>
 </page>
