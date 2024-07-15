@@ -23,7 +23,6 @@ class Api implements ArrayInterface
     public function toOptionArray(): array
     {
         return [
-            'ecorreios'           => __('E-Correios (Não oficial)'),
             'republicavirtual'    => __('Republica Virtual'),
             'viacep'              => __('Via Cep'),
         ];
