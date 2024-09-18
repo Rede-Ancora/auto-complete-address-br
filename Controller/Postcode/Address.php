@@ -108,10 +108,8 @@ class Address extends Action implements HttpGetActionInterface
         $client = $this->httpClientFactory->create();
         $api = $this->config->getConfigForDeveloper('api');
         $url = 'http://endereco.ecorreios.com.br/app/enderecoCep.php?cep='.$zipcode;
-
-        if ($api === 'ecorreios') {
-            $url = 'http://endereco.ecorreios.com.br/app/enderecoCep.php?cep='.$zipcode;
-        } elseif ($api === 'viacep') {
+        
+        if ($api === 'viacep') {
             $url = 'https://viacep.com.br/ws/'.$zipcode.'/json/';
         } elseif ($api === 'republicavirtual') {
             $url = 'http://cep.republicavirtual.com.br/web_cep.php?cep='.$zipcode.'&formato=jsonp';
@@ -148,9 +146,7 @@ class Address extends Action implements HttpGetActionInterface
             $regionId = $region->getId();
         }
 
-        if ($api === 'ecorreios') {
-            $data = $this->getFormatECorreios($data);
-        } elseif ($api === 'viacep') {
+        if ($api === 'viacep') {
             $data = $this->getFormatViaCep($data);
         } elseif ($api === 'republicavirtual') {
             $data = $this->getFormatRepublicaVirtual($data);
@@ -168,22 +164,6 @@ class Address extends Action implements HttpGetActionInterface
         $result = $this->getRelationShipReturn($apiData);
 
         return $result;
-    }
-
-    /**
-     * Get Format Return API ECorreios.
-     *
-     * @param array $data
-     *
-     * @return array
-     */
-    public function getFormatECorreios(array $data): array
-    {
-        $data['street'] = isset($data['logradouro']) ? $data['logradouro'] : '';
-        $data['district'] = isset($data['bairro']) ? trim($data['bairro']) : '';
-        $data['city'] = isset($data['cidade']) ? $data['cidade'] : '';
-
-        return $data;
     }
 
     /**
@@ -211,7 +191,7 @@ class Address extends Action implements HttpGetActionInterface
      */
     public function getFormatRepublicaVirtual(array $data): array
     {
-        $data['street'] = isset($data['logradouro']) ? $data['logradouro'] : '';
+        $data['street'] = isset($data['logradouro']) ? $data['tipo_logradouro']. ' '. $data['logradouro'] : '';
         $data['district'] = isset($data['bairro']) ? trim($data['bairro']) : '';
         $data['city'] = isset($data['cidade']) ? $data['cidade'] : '';
 
